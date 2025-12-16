@@ -305,6 +305,7 @@ h1 {
 
 /* --- Footer --- */
 .footer, footer {
+  font-family: "Comfortaa";
   text-align: center;
   padding: 40px;
   color: #666;
