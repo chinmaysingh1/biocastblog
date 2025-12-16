@@ -1,576 +1,347 @@
-  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+/* biocast.css - Universal Support for Index & Blogs */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap');
 
-  @font-face {
-    font-family: Comfortaa-Light;
-    src: url(Comfortaa-Light.ttf);
-  }
+@font-face {
+  font-family: Comfortaa-Light;
+  src: url(Comfortaa-Light.ttf);
+}
 
-  html {
-    height: 100vh;
-  }
+:root {
+  --primary-color: #1ED760; /* Spotify Green */
+  --bg-color: #000000;
+  --card-bg: #121212;
+  --text-color: #FFFFFF;
+  --text-muted: #B3B3B3;
+  --font-main: 'Comfortaa', sans-serif;
+  --transition-speed: 0.3s;
+}
 
-  html, body {
-    font-family: Comfortaa-Light;
-    background-color: black;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+/* --- Resets & Global --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  body, header, footer {
-    margin: 0;
-    padding: 0;
-    color:#1ED760;
-  }
+html, body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
 
-  .header {
-    padding: 50px;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-  .footer {
-    position:static;
-    width: 100%;
-    margin-top: 10%;
-    margin-bottom: 3%;
-    max-height: 10%;
-    color: inherit;
-    text-align: center;
-  }
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+  transition: color var(--transition-speed) ease;
+}
 
-  .button {
-    padding: 15px;
-    text-align: center;
-  }
+a:hover {
+  color: #fff;
+}
 
-  .button2 {
-    font-family: Comfortaa-Regular;
-    padding: 32px;
-    color: #1ED760;
-    border-radius: 36px;
-    border: 2px solid #1ED760;
-    font-size: large;
-    cursor: pointer;
-  }
+/* =========================================
+   HEADER STYLES (Supports Both Versions)
+   ========================================= */
+.header {
+  padding: 15px 5%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid #333;
+}
 
-  .homebutton { 
-    text-align: center;
-    border: none;
-    max-width: 20%;
-  }
+/* Version A: New Index Header (.nav-container) */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .homebutton img {
-    display: inline-flex;
-    max-width: 30%;
-    margin: 0 auto;
-  }
+/* Version B: Legacy Blog Header (.headerbutton) */
+.headerbutton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Pushes links right */
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+  width: 100%;
+}
 
-  .headerbutton {
-    text-align:center;
-    padding: 8px;
-  }
+.headerbutton button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
 
-  .headerbutton a {
-    margin-left: 0%;
-    margin-right: 0%;
-  }
+/* Force Logo Left on Legacy Pages */
+.homebutton {
+  order: -1;
+  margin-right: auto; /* Pushes everything else right */
+}
 
-  .headerbutton2 {
-    font-family: Comfortaa;
-    background-color: transparent;
-    color: #1ED760;
-    margin: 4%;
-    font-size: large;
-    border: none;
-    cursor: pointer;
-  }
+/* Logo Styling (Shared) */
+.logo img, .homebutton img {
+  height: 50px;
+  width: auto;
+  transition: transform var(--transition-speed);
+}
 
-  .abutton2 {
-    color: #1ED760;
-    text-decoration: none;
-    position: relative;
-  }
+.logo:hover img, .homebutton:hover img {
+  transform: scale(1.1);
+}
 
-  .abutton {
-    color: #1ED760;
-    text-decoration: none;
-    position: relative;
-  }
+/* Link Styling (Shared) */
+.nav-links, .headerbutton {
+  font-family: var(--font-main);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
 
-  .abutton::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0.1em;
-    background: linear-gradient(#1ED760, #1ED760);
-    background-size: 0% 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.3s ease-in-out;
-  }
+.nav-links a, .abutton {
+  color: var(--primary-color);
+  position: relative;
+  letter-spacing: 1px;
+  padding: 5px 0;
+  margin: 0 10px;
+  display: inline-block;
+  font-weight: 700;
+}
 
-  .abutton:hover::before {
-    background-size: 100% 100%;
-  }
+.nav-links a::after, .abutton::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width var(--transition-speed);
+}
 
-  .expand-button {
-    transition: all 0.3s;
-  }
+.nav-links a:hover::after, .abutton:hover::after {
+  width: 100%;
+}
 
-  .expand-button:hover {
-    transform: scale(1.05);
-  }
+/* =========================================
+   LAYOUT: INDEX PAGE (New Grid System)
+   ========================================= */
+main {
+  padding: 40px 20px;
+  min-height: 80vh;
+}
 
-  .expand-button:hover strong {
-    color: black;
-  }
+h1 {
+  color: var(--primary-color);
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.2;
+}
 
-  .expand-button2 {
-    background-color: transparent;
-    transition: all 0.3s;
-  }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .expand-button2:hover {
-    transform: scale(1.05);
-  }
+.blog-card {
+  background-color: var(--card-bg);
+  border: 1px solid #333;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform var(--transition-speed), border-color var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+}
 
-  .expand-button3 {
-    transition: all 0.3s;
-  }
+.blog-card:hover {
+  transform: translateY(-7px);
+  border-color: var(--primary-color);
+}
 
-  .expand-button3:hover {
-    transform: scaleY(1.01);
-  }
+.blog-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #222;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 10%;
-    border-radius: 36px;
-  }
+.blog-thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #222;
+}
 
-  .container2 {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+.blog-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
 
-  .container4 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #222;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 2%;
-    border-radius: 36px;
-  }
+.blog-title {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  line-height: 1.3;
+}
 
-  img {
-    max-width: 100%;
-  }
+.blog-date {
+  color: var(--primary-color);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
 
-  .image {
-    justify-content: center;
-    max-width: 100%;
-    display: flex;
-    margin-left: 5%;
-  }
+.blog-excerpt {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
 
-  .image img {
-    width: 4000px;
-  }
+/* =========================================
+   LAYOUT: INDIVIDUAL BLOG POSTS (Legacy)
+   ========================================= */
+/* Container wrapper for single posts */
+.container.blog {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  padding: 50px 60px;
+  border-radius: 24px;
+  border: 1px solid #333;
+}
 
-  .text {
-    font-size: 40px;
-    color: #1ED760;
-    justify-content: center;
-    text-align: center;
-    margin-top: 20px; /* Add some space between image and text */
-  }
+.blog-post {
+  color: #eee;
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
 
-  .text2 {
-    font-size: 20px;
-    color: #1ED760;
-    justify-content: center;
-    text-align: center;
-    max-width: 100%;
-    margin-top: 20px;
-  }
+.blog-post h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  .text3 {
-    color: #1ED760;
-    text-align: center;
-    justify-content: center;
-    font-size: 72px;
-    font-weight: bold;
-  }
+.published-date {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  display: block;
+}
 
-  .text4 {
-    color: inherit;
-    display: flex;
-    justify-content: center;
-    max-width: 40%;
-  }
+/* Center Image Fix */
+.center-image {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 30px 0;
+}
 
-  .about {
-    display: block;
-    text-align: center;
-    width: 80%;
-    padding: 3em;
-    background-color: #191414;
-    color: #1ED760;
-    border-radius: 36px;
-    margin-top: 7%;
-    margin-bottom: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 2;
-    font-size: x-large;
-  }
+.center-image img {
+  max-width: 200px; /* DNA Cream Logo Size */
+  height: auto;
+}
 
-  .about h2 {
-    margin-bottom: 5%;
-  }
+.figures {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
 
-  .team-members {
-    display: flex;
-    justify-content:space-around;
-    padding: 20px;
-    color: #1ED760;
-  }
+.figures img {
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  max-height: 500px;
+}
 
-  .member {
-    text-align: center;
-    width: 30%;
-    line-height: 2;
-    padding: 3em;
-    background-color: #191414;
-    border-radius: 36px;
-  }
+.quotes {
+  background: #1a1a1a;
+  padding: 20px 30px;
+  border-left: 4px solid var(--primary-color);
+  margin: 30px 0;
+  font-style: italic;
+  color: #fff;
+}
 
-  #cream {
-    color: #1ED760;
-  }
+.links {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
-  .member img {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    border-radius: 36px;
-    margin-bottom: 50px;
-  }
+.sign-off {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+  text-align: right;
+  font-style: italic;
+  color: var(--primary-color);
+}
 
-  .member p {
-    letter-spacing: 0.5px;
-    font-size:x-large;
-  }
+/* --- Footer --- */
+.footer, footer {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 0.9rem;
+  border-top: 1px solid #333;
+  margin-top: 50px;
+}
 
-  .member h2 {
-    font-size: xx-large;
-  }
-
-  .blog-preview {
-    background-color: #191414;
-    max-width: 100%;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 24px;
-    display: flex;
-  }
-
-  .blog-preview img {
-    width: 75px;
-    height: auto;
-    border-radius: 8px;
-    margin-left: 1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-right: 2%;
-  }
-
-  .blog-info {
-    flex: 1;
-  }
-
-  .blog-title a {
-    font-size: 24px;
-    margin: 5px 0;
-    color: inherit;
-    text-decoration: underline;
-  }
-
-  .blog-date {
-    font-size: 14px;
-    color: #1ED760;
-    text-align: left;
-    margin: 5px 0;
-  }
-
-  .blog-excerpt {
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 5px 0;
-    text-align: left;
-    color: #1ED760;
-  }
-
-
-  .blog {
-    max-width: 100%;
-    margin-left: 196px;
-    margin-right: 196px;
-    padding: 20px;
-    background-color: #191414;
-    border-radius: 24px;
-    display: flex;
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 768px) {
+  /* Header Mobile */
+  .nav-container, .headerbutton {
     flex-direction: column;
-    align-items: center;
+    gap: 15px;
   }
-
-  .blog img {
-    width: 10%;
-  }
-
-  .blog-post {
-    color: #1ED760;
-    line-height: 2;
-  }
-
-  .blog-post p {
-    text-align: left;
-    margin: 2%;
-  }
-
-  .blog-post h1 {
-    margin-top: 0.5%;
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-
-  .center-image {
-    display: flex;
-    justify-content: center; /* Center the image horizontally */
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px; /* Add margin to separate image from text */
-  }
-
-  .published-date {
-    font-size: small;
-  }
-
-  .figures {
-    display: flex;
-    justify-content: center; /* Center the image horizontally */
-    margin: 20px;
-  }
-
-  .figures img {
-    width: auto;
-    height: auto;
-  }
-
-  .quotes {
-    font-family: 'Times New Roman', Times, serif;
-    margin-left: 20%;
-    margin-right: 20%;
-    font-size: large;
-  }
-
-  .quotes p {
-    text-align: center;
-  }
-
-  .sign-off {
-    line-height: 1;
-  }
-
-  .links {
-    color: #1ED760;
-    text-decoration: underline;
-  }
-
-  .container3 {
-    display: flex;
-    align-items: center;
+  
+  .nav-links, .headerbutton {
+    flex-wrap: wrap;
     justify-content: center;
   }
 
-  .form-container {
-    background-color: #191414;
-    padding: 20px;
-    border-radius: 24px;
-    margin-left: 10%;
-    margin-right: 10%;
-    color: #1ED760;
-  }
-
-  .form-container img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3%;
-    margin-bottom: 3%;
-    width: 10%;
-  }
-
-  .form-container p {
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-
-  .form-container label, input, textarea {
-    margin-left: 2%;
-    margin-right: 2%;
-  }
-
-  .form-container label {
-    margin-top: 1.5%
-  }
-
-  form {
+  .homebutton {
+    margin-right: 0;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-  }
-
-  label {
-    color: #1ED760;
-    margin-bottom: 5px;
-  }
-
-  input,
-  textarea {
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #1ED760;
-    border-radius: 5px;
-    background-color: #000;
-    color: #1ED760;
-  }
-
-  button[type="submit"] {
-    padding: 15px;
-    background-color: black;
-    color: #1ED760;
-    font-size: large;
-    border: 2px solid white;
-    border-radius: 36px;
-    margin-top: 20px;
-    cursor: pointer;
-  }
-
-  button[type="submit"]:hover {
-    transform: scale(1.01);
-    background-color: #1ED760;
-    color: black;
-  }
-
-  .form-container h2, p {
-    text-align: center;
-    }
-
-  .success {
-    color: #1ED760;
-    text-align: left;
-    margin-bottom: 20%;
-    margin-left: 10%;
-  }
-
-  .listenhere {
-    margin-top: 1%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 5%;
-    text-align: center;
     justify-content: center;
   }
 
-  .centered {
-    justify-content: center;
-    align-items: center;
+  /* Grid Mobile */
+  .blog-grid {
+    grid-template-columns: 1fr;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10%);
-    }
-    to {
-      opacity: 1;
-    }
+  /* Article Mobile */
+  .container.blog {
+    padding: 30px 20px;
   }
-
-  @keyframes fillAnimation {
-    from {
-      fill: transparent;
-    }
-    to {
-      fill: var(--fill-color);
-    }
-  }
-
-  @keyframes sign {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  :root {
-    --strand-color: transparent;
-    --fill-color: #1ED760;
-  }
-
-  #svg-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-
-  #Layer_1_Mobile {
-    margin: 0 auto;
-    display: block;
-  }
-
-  #AboutUsNucleotide, #ListenHereNucleotide, #BlogNucleotide, #TikTokNucleotide, #InstagramNucleotide, #ContactUsNucleotide {
-    animation: fadeIn 500ms ease forwards;
-  }
-
-  #Strand1 {
-    stroke-dasharray: 1187;
-    stroke-dashoffset: 1187;
-    animation: fadeIn 500ms ease forwards, sign 1s ease, fillAnimation 1s ease forwards;
-    animation-fill-mode: forwards;
-  }
-
-  #Strand2 {
-    stroke-dasharray: 651;
-    stroke-dashoffset: 651;
-    animation: fadeIn 500ms ease forwards, sign 1s ease, fillAnimation 1s ease forwards;
-    animation-fill-mode: forwards;
-  }
-
-  #Strand3 {
-    stroke-dasharray: 609;
-    stroke-dashoffset: 609;
-    animation: fadeIn 500ms ease forwards, sign 1s ease, fillAnimation 1s ease forwards;
-    animation-fill-mode: forwards;
-  }
-
-  #BIOCAST {
-    stroke-dasharray: 1644;
-    stroke-dashoffset: 1644;
-    animation: fadeIn 500ms ease forwards, sign 1s ease, fillAnimation 1s ease forwards;
-    animation-fill-mode: forwards;
-  }
-
-  #MicStand {
-    stroke-dasharray: 2045;
-    stroke-dashoffset: 2045;
-    animation: fadeIn 500ms ease forwards, sign 1s ease, fillAnimation 1s ease forwards;
-    animation-fill-mode: forwards;
-  }
+}
