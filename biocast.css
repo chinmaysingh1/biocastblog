@@ -48,7 +48,7 @@ a:hover {
 }
 
 /* =========================================
-   HEADER STYLES (Supports Both Versions)
+   HEADER STYLES
    ========================================= */
 .header {
   padding: 15px 5%;
@@ -60,7 +60,6 @@ a:hover {
   border-bottom: 1px solid #333;
 }
 
-/* Version A: New Index Header (.nav-container) */
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -69,61 +68,36 @@ a:hover {
   margin: 0 auto;
 }
 
-/* Version B: Legacy Blog Header (.headerbutton) */
-.headerbutton {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Pushes links right */
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 20px;
-  width: 100%;
-}
-
-.headerbutton button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-/* Force Logo Left on Legacy Pages */
-.homebutton {
-  order: -1;
-  margin-right: auto; /* Pushes everything else right */
-}
-
-/* Logo Styling (Shared) */
-.logo img, .homebutton img {
+/* Logo Styling */
+.logo img {
   height: 50px;
   width: auto;
   transition: transform var(--transition-speed);
 }
 
-.logo:hover img, .homebutton:hover img {
+.logo:hover img {
   transform: scale(1.1);
 }
 
-/* Link Styling (Shared) */
-.nav-links, .headerbutton {
+/* Link Styling */
+.nav-links {
   font-family: var(--font-main);
   font-weight: 700;
   font-size: 0.9rem;
   text-transform: uppercase;
+  display: flex;
+  gap: 20px;
 }
 
-.nav-links a, .abutton {
+.nav-links a {
   color: var(--primary-color);
   position: relative;
   letter-spacing: 1px;
   padding: 5px 0;
-  margin: 0 10px;
-  display: inline-block;
   font-weight: 700;
 }
 
-.nav-links a::after, .abutton::after {
+.nav-links a::after {
   content: '';
   position: absolute;
   width: 0;
@@ -134,12 +108,28 @@ a:hover {
   transition: width var(--transition-speed);
 }
 
-.nav-links a:hover::after, .abutton:hover::after {
+.nav-links a:hover::after {
   width: 100%;
 }
 
+/* --- Hamburger Menu Styles --- */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
 /* =========================================
-   LAYOUT: INDEX PAGE (New Grid System)
+   LAYOUT: INDEX PAGE
    ========================================= */
 main {
   padding: 40px 20px;
@@ -222,9 +212,8 @@ h1 {
 }
 
 /* =========================================
-   LAYOUT: INDIVIDUAL BLOG POSTS (Legacy)
+   LAYOUT: INDIVIDUAL BLOG POSTS
    ========================================= */
-/* Container wrapper for single posts */
 .container.blog {
   max-width: 900px;
   margin: 0 auto;
@@ -255,7 +244,6 @@ h1 {
   display: block;
 }
 
-/* Center Image Fix */
 .center-image {
   display: flex;
   justify-content: center;
@@ -264,7 +252,7 @@ h1 {
 }
 
 .center-image img {
-  max-width: 200px; /* DNA Cream Logo Size */
+  max-width: 200px;
   height: auto;
 }
 
@@ -303,7 +291,6 @@ h1 {
   color: var(--primary-color);
 }
 
-/* --- Footer --- */
 .footer, footer {
   font-family: "Comfortaa";
   text-align: center;
@@ -318,22 +305,56 @@ h1 {
    MOBILE RESPONSIVENESS
    ========================================= */
 @media (max-width: 768px) {
-  /* Header Mobile */
-  .nav-container, .headerbutton {
-    flex-direction: column;
-    gap: 15px;
+  .nav-container {
+    padding: 0;
   }
   
-  .nav-links, .headerbutton {
-    flex-wrap: wrap;
-    justify-content: center;
+  /* Hamburger visible on mobile */
+  .hamburger {
+    display: block;
+    z-index: 1001;
   }
 
-  .homebutton {
-    margin-right: 0;
+  /* Hamburger Animation */
+  .hamburger.toggle span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+  }
+  .hamburger.toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.toggle span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+  }
+
+  /* Nav Links Sliding Menu */
+  .nav-links {
+    position: fixed;
+    top: 70px; /* Height of header */
+    right: 0;
+    height: calc(100vh - 70px);
     width: 100%;
-    display: flex;
-    justify-content: center;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px;
+    gap: 30px;
+    transform: translateX(100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    transform: translateX(0%);
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    width: 80%;
+    text-align: center;
+    padding: 15px;
   }
 
   /* Grid Mobile */

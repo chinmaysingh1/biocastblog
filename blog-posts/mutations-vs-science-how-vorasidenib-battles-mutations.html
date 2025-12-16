@@ -10,13 +10,25 @@
   <meta name="view-transition" content="same-origin" />
 </head>
 <body>
+  
   <header class="header">
-    <div class="headerbutton">
-      <button class="headerbutton2 expand-button2"><a class="abutton" href="https://biocast.co/aboutus.html"><strong>ABOUT US</strong></a></button>
-      <button class="headerbutton2 expand-button2"><a class="abutton" href="https://blog.biocast.co"><strong>BLOG POSTS</strong></a></button>
-      <button class="expand-button2 homebutton"><a href="https://biocast.co"><img src="../Images/BioCastDNASpotifyGreen.png" alt=""></a></button>
-      <button class="headerbutton2 expand-button2"><a class="abutton" href="https://biocast.co/listenhere.html"><strong>LISTEN HERE</strong></a></button>
-      <button class="headerbutton2 expand-button2"><a class="abutton" href="https://biocast.co/contactus.html"><strong>CONTACT US</strong></a></button>
+    <div class="nav-container">
+      <a href="https://biocast.co" class="logo">
+        <img src="../Images/BioCastDNASpotifyGreen.png" alt="BioCast Logo">
+      </a>
+      
+      <div class="hamburger" id="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="https://biocast.co/aboutus.html">About Us</a>
+        <a href="https://blog.biocast.co">News</a>
+        <a href="https://biocast.co/listenhere.html">Listen Here</a>
+        <a href="https://biocast.co/contactus.html">Contact Us</a>
+      </nav>
     </div>
   </header>
   <main>
@@ -60,5 +72,16 @@
   <div class="footer">
     <p>BioCast — Singh & Shirolkar 2026</p>
   </div>
+  <script>
+    const hamburger = document.getElementById('hamburger-btn');
+    const navLinks = document.getElementById('nav-links');
+
+    if(hamburger) {
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('toggle');
+      });
+    }
+  </script>
 </body>
 </html>
